@@ -38,7 +38,10 @@ memcol = 0
 isch = 0
 usch = 0
 found = ""
-run_macro(pathword2)
+try:
+    run_macro(pathword2)
+except:
+    print("макрос не сработал")
 df = pandas.read_excel(pathword2)
 doc = docx.Document(pathword)
 for para in doc.paragraphs:
