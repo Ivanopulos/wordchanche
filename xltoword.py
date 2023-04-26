@@ -1,4 +1,5 @@
 #pyinstaller --onefile xltoword.py cd C:\Users\IMatveev\PycharmProjects\wordchanche\
+# правильный наташин
 import os
 import zipfile
 import re
@@ -9,6 +10,7 @@ import sys
 import win32com.client  # pip install pypiwin32
 import docx #pip install python-docx
 import shutil
+import datetime
 
 print(os.environ.get( "USERNAME" ))
 def run_macro(name):
@@ -117,7 +119,10 @@ for folder, subfolders, files in os.walk(pathwork + "/B"):
 fantasy_zip.close()  # transform it to zip
 print("zip saved")
 name = str(df.iloc[0, 1])
-name = "О разв ПМСП в " + name[82:]
+if len(name)>82:
+    name = "О разв ПМСП в " + name[82:]
+else:
+    name = "Документ " + str(datetime.date.today())
 try:
     os.remove(pathwork + "/" + name + ".docx")
 except:
