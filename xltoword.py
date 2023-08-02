@@ -47,7 +47,6 @@ isch = 0
 usch = 0
 found = ""
 regions = pandas.read_excel(pathword2).dropna(subset=['regions'])
-df = pandas.read_excel(pathword2)
 for region in regions['regions']:
     mem = 0
     memcol = 0
@@ -56,6 +55,7 @@ for region in regions['regions']:
     found = ""
     #try:
     run_macro(pathword2, region)
+    df = pandas.read_excel(pathword2)
     #except:
     #    print("!!!!!!!!!макрос не сработал!!!!!!!")
         #time.sleep(5)
@@ -137,12 +137,14 @@ for region in regions['regions']:
     fantasy_zip.close()  # transform it to zip
     print("zip saved")
     name = str(df.iloc[0, 1])
-    if len(name)>82:
+    if len(name) > 82:
         name = "О разв ПМСП в " + name[82:]
+        print(name)
     else:
         name = "Документ " + str(datetime.date.today())
     try:
         os.remove(pathwork + "/" + name + ".docx")
+        print(name, "removed")
     except:
         asd = 1
     os.rename(pathwork + "/B.zip", pathwork + "/" + name + ".docx")
